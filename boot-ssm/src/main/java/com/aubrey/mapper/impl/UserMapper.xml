@@ -6,7 +6,7 @@
   <insert id="add" parameterType="com.aubrey.domain.User">
   	
   	insert into user
-  	<trim prefix="(" suffix=")" suffixOverrides="">
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
   		<if test="id !=null">
   			id,
   		</if>
@@ -18,7 +18,7 @@
   		</if>
   	</trim>
   	values
-  	<trim prefix="(" suffix=")" suffixOverrides="">
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
   		<if test="id !=null">
   			#{id},
   		</if>

@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aubrey.domain.User;
 import com.aubrey.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
 	
 	@Autowired
@@ -20,6 +23,8 @@ public class UserController {
 	
 	@GetMapping
 	public List<User> query(User user){
+		log.debug("==============debug==============");
+		log.info("$$$$$$$$$$$$$$$$info$$$$$$$$$$$$$$$$");
 		return userService.query(user);
 	}
 	
