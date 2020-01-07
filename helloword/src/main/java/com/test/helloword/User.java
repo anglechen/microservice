@@ -1,19 +1,29 @@
 package com.test.helloword;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix = "user")
 public class User {
-	private String name ;
 	
+//	user.name
+	private String username ;
 	
+//	user.password
 	private String password;
 
 
-	public String getName() {
-		return name;
+	
+
+
+	public String getUsername() {
+		return username;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 

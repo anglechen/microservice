@@ -1,4 +1,8 @@
 # server.port=9000 
 #server.port: 9000
-server:
-  port: 9000  servlet:    context-path: /test
+#修改启动的banner
+spring:  banner:    location: banner.txt
+
+money.max: 10000  
+user.username: "张三2222"
+user.password: 123456 
