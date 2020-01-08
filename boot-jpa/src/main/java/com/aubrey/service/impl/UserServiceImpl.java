@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void update(User user) {
-		
+		userDao.saveAndFlush(user);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> query(User user) {
-		List<User> result =  userDao.findAll();
-		return result;
-		
+//		List<User> result =  userDao.findAll();
+//		return userDao.findByNameAndPassword(user.getName(),user.getPassword());
+		return userDao.findByAgeLessThan(user.getAge());
 	}
 	
 	
