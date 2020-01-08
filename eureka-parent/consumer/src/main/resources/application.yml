@@ -1,0 +1,37 @@
+server:
+  port: 8791
+
+spring:
+  application:
+    name: consumer
+
+
+eureka:
+  instance:
+    #        表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
+    lease-expiration-duration-in-seconds: 90
+    #    心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-renewal-interval-in-seconds: 5
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8756/eureka/,http://localhost:8758/eureka/
+    #    表示eureka client间隔多久去拉取服务注册信息，默认为30秒，对于api-gateway，如果要迅速获取服务注册状态，可以缩小该值，比如5秒
+    registry-fetch-interval-seconds: 30
+    healthcheck:
+      enabled: true                           # 开启健康检查（依赖spring-boot-starter-actuator）
+
+#开启feignclent的hystrix 断路器功能需要主动添加，默认关闭
+feign:
+  hystrix:
+    enabled: true
+
+
+#  配置格式为<client>.<nameSpace>.<property>=<value>
+#  client为客户端名称：我们的服务提供者名我provider
+#  nameSpace为名称空间：默认就是ribbon
+#  property为属性名：我们要配置负载均衡策略就是NFLoadBalancerRuleClassName
+# com.netflix.loadbalancer.RandomRule 自带的策略，也可以使用自定义的策略
+# 需要在启动类上添加：
+#  // name是服务提供者名，configuration是我们配置的负载均衡策略
+#  @RibbonClient(name="provider",configuration = MyRule.class)
+provider.ribbon.NFLoadBalancerRuleClassName: com.aubrey.consumer.rules.MyRule

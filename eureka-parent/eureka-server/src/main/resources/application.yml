@@ -1,0 +1,27 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+    #    表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
+    lease-expiration-duration-in-seconds: 90
+  client:
+    #     设置是否将自己作为客户端注册到注册中心（缺省true）
+    #     这里为不需要（查看@EnableEurekaServer注解的源码，会发现它间接用到了@EnableDiscoveryClient）
+    registerWithEureka: false
+    #    设置是否从注册中心获取注册信息（缺省true）
+    #     因为这是一个单点的EurekaServer，不需要同步其它EurekaServer节点的数据，故设为false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    #    表示eureka client间隔多久去拉取服务注册信息，默认为30秒，对于api-gateway，如果要迅速获取服务注册状态，可以缩小该值，比如5秒
+    registry-fetch-interval-seconds: 30
+  server:
+    #是否开启自我保护模式，默认为true。
+    enable-self-preservation: true
+    #续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms）
+    eviction-interval-timer-in-ms: 10000
+spring:
+  application:
+    name: eurka-server

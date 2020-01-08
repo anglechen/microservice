@@ -1,0 +1,8 @@
+spring.application.name: consule-client
+server.port: 8501
+spring.cloud.consul.host: localhost
+spring.cloud.consul.port: 8500
+
+#config ,一定要放到bootstrap配置文件中
+spring.cloud.consul.config.enabled: true
+spring.cloud.consul.config.format: yaml

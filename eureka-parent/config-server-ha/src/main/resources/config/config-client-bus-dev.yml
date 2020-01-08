@@ -1,0 +1,26 @@
+#文件件命名格式为 客户端的spring.application.name 加上profile后缀
+name: config-test-3333333333333333333333333333.......................
+server.port: 8091
+eureka:
+  instance:
+    #        表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
+    lease-expiration-duration-in-seconds: 90
+    #    心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-renewal-interval-in-seconds: 5
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8756/eureka/,http://localhost:8758/eureka/
+    #    表示eureka client间隔多久去拉取服务注册信息，默认为30秒，对于api-gateway，如果要迅速获取服务注册状态，可以缩小该值，比如5秒
+    registry-fetch-interval-seconds: 30
+    healthcheck:
+      enabled: true                           # 开启健康检查（依赖spring-boot-starter-actuator）
+
+#整合bus消息组件，实现配置自动刷新，需要用到rabbitmq
+spring.rabbitmq.host: 192.168.32.144
+spring.rabbitmq.port: 5672
+spring.rabbitmq.username: guest
+spring.rabbitmq.password: guest
+
+spring.cloud.bus.enabled: true
+spring.cloud.bus.trace.enabled: true
+management.endpoints.web.exposure.include: bus-refresh
