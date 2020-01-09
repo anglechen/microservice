@@ -21,9 +21,18 @@ public class ConsumerController {
 
     @RequestMapping("/hello")
     @HystrixCommand(fallbackMethod = "error")
-    public String hello() {
+    public String hello()
+    {
         return restTemplate.getForObject("http://provider/provider/hello", String.class);
     }
+
+
+
+
+
+
+
+
 
     public String error() {
         return "soory ,the service is not be abled to us";
@@ -32,6 +41,7 @@ public class ConsumerController {
 
     @RequestMapping("/helloFeign")
     public String helloFeiclient() {
+//        http://provider/provider/hello
         return providerFeiclient.sayHello();
 
 

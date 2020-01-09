@@ -1,6 +1,7 @@
 package com.aubrey.consumer;
 
 import com.aubrey.consumer.rules.MyRule;
+import com.netflix.loadbalancer.BestAvailableRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -17,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients
 @EnableHystrix
 // name是服务提供者名，configuration是我们配置的负载均衡策略，自定义负载均衡策略
-@RibbonClient(name = "provider", configuration = MyRule.class)
+@RibbonClient(name = "provider", configuration = BestAvailableRule.class)
 public class ConsumerApplication {
 
     public static void main(String[] args) {

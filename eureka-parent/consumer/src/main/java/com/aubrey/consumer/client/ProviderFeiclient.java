@@ -9,4 +9,7 @@ public interface ProviderFeiclient {
 
     @RequestMapping("/provider/hello")
     public String sayHello();
+
+
+
 }

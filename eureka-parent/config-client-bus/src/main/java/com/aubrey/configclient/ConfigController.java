@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RefreshScope
+@RefreshScope //配置自动刷新
 public class ConfigController {
 
     // 远程配置修改配置后，访问：http://localhost:8091/actuator/bus-refresh，然后再次查看配置，可以发现配置会自动刷新

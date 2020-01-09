@@ -1,8 +1,11 @@
 package com.aubrey.zuul;
 
 import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class MyZuulFilter extends ZuulFilter {
@@ -32,6 +35,9 @@ public class MyZuulFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
+        RequestContext requestContext = RequestContext.getCurrentContext();
+        HttpServletRequest request = requestContext.getRequest();
+        System.out.println(request.getRequestURI());
         System.out.println("is zuul filter test....................................................");
         return null;
     }
